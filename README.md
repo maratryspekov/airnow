@@ -2,9 +2,9 @@
 
 Real-time air quality monitoring app with a clean glass morphism UI. Check pollution levels for your city and get EPA-standard AQI data.
 
-## 🚀 [Live Demo](https://airnow-lime.vercel.app)
+## 🚀 [Live Demo](https://air-now-sepia.vercel.app)
 
-**Try it now**: [airnow-lime.vercel.app](https://airnow-lime.vercel.app)
+**Try it now**: [air-now-sepia.vercel.app](https://air-now-sepia.vercel.app)
 
 ## ✨ Features
 
@@ -123,7 +123,7 @@ npm run build
 npm run preview
 ```
 
-**Live on Vercel**: [airnow-lime.vercel.app](https://airnow-lime.vercel.app)
+**Live on Vercel**: [air-now-sepia.vercel.app](https://air-now-sepia.vercel.app)
 
 ## 💭 What I Learned
 
