@@ -32,7 +32,6 @@ function MainPage() {
 
   // Add new city (up to 6)
   const addCity = (newCity: { name: string; aqi: number }) => {
-    console.log("Adding new city:", newCity);
     setCities((prev) => {
       // if city already exists - don't add
       if (
@@ -67,10 +66,6 @@ function MainPage() {
       </div>
 
       {/*cities grid */}
-      {(() => {
-        console.log("Current cities array:", cities);
-        return null;
-      })()}
       {cities.length === 0 ? (
         <motion.div
           className="text-center mt-12 text-white/60"

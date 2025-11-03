@@ -125,8 +125,6 @@ export function useAirQuality() {
         `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`
       );
 
-      console.log("API response:", response.data);
-
       if (
         !response.data ||
         !response.data.list ||
