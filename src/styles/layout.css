@@ -1,0 +1,56 @@
+/* Main title styling */
+.main-title {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 2.5rem;
+  letter-spacing: 0.02em;
+  background: linear-gradient(135deg, #ffffff 0%, #e5e7eb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 1.75rem;
+  }
+}
+
+/* City cards grid - maximum 6 cards, 3 per row */
+.city-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 2rem !important;
+  justify-content: stretch !important;
+  align-items: start !important;
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin: 3rem auto 0 auto !important;
+  padding: 0 2rem !important;
+  box-sizing: border-box !important;
+}
+
+/* tablet 2 rows */
+@media (max-width: 768px) {
+  .city-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 680px;
+  }
+}
+
+/* mobile*/
+@media (max-width: 480px) {
+  .city-grid {
+    grid-template-columns: 1fr;
+    max-width: 340px;
+    gap: 1rem;
+  }
+}

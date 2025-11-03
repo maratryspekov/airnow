@@ -1,0 +1,32 @@
+@keyframes shimmer {
+  0% {
+    transform: rotate(25deg) translateX(-120%);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.8;
+  }
+  50% {
+    transform: rotate(25deg) translateX(120%);
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(25deg) translateX(-120%);
+    opacity: 0;
+  }
+}
+
+@keyframes hazeMove {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
