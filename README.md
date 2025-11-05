@@ -29,10 +29,9 @@ Real-time air quality monitoring app with a clean glass morphism UI. Check pollu
 
 ## 🛠️ Tech Stack
 
-![Node.js](https://img.shields.io/badge/Node.js-22.x-339933?style=flat-square&logo=node.js&logoColor=white)
-![npm](https://img.shields.io/badge/npm-10.x-CB3837?style=flat-square&logo=npm&logoColor=white)
 ![Axios](https://img.shields.io/badge/Axios-1.12.2-5A29E4?style=flat-square&logo=axios&logoColor=white)
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.23.24-0055FF?style=flat-square&logo=framer&logoColor=white)
+![OpenWeatherMap](https://img.shields.io/badge/OpenWeatherMap-API-FF6B35?style=flat-square&logo=openweathermap&logoColor=white)
 
 Built with modern React + TypeScript setup:
 
