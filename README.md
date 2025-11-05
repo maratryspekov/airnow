@@ -1,8 +1,18 @@
 # 🌍 AirNow - Air Quality Monitor
 
+[![React](https://img.shields.io/badge/React-19.1.1-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-7.1.7-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1.16-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
+
 Real-time air quality monitoring app with a clean glass morphism UI. Check pollution levels for your city and get EPA-standard AQI data.
 
 ## 🚀 [Live Demo](https://air-now-sepia.vercel.app)
+
+[![Live Demo](https://img.shields.io/badge/Live_Demo-air--now--sepia.vercel.app-00C7B7?style=for-the-badge&logo=vercel&logoColor=white)](https://air-now-sepia.vercel.app)
+[![GitHub](https://img.shields.io/badge/GitHub-maratryspekov%2Fairnow-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/maratryspekov/airnow)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
 **Try it now**: [air-now-sepia.vercel.app](https://air-now-sepia.vercel.app)
 
@@ -19,13 +29,19 @@ Real-time air quality monitoring app with a clean glass morphism UI. Check pollu
 
 ## 🛠️ Tech Stack
 
+![Node.js](https://img.shields.io/badge/Node.js-22.x-339933?style=flat-square&logo=node.js&logoColor=white)
+![npm](https://img.shields.io/badge/npm-10.x-CB3837?style=flat-square&logo=npm&logoColor=white)
+![Axios](https://img.shields.io/badge/Axios-1.12.2-5A29E4?style=flat-square&logo=axios&logoColor=white)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.23.24-0055FF?style=flat-square&logo=framer&logoColor=white)
+
 Built with modern React + TypeScript setup:
 
-- **Frontend**: React 18, TypeScript, Tailwind CSS
-- **Build tool**: Vite (super fast!)
+- **Frontend**: React 19, TypeScript, Tailwind CSS 4
+- **Build tool**: Vite 7 (super fast!)
 - **API**: OpenWeatherMap Air Pollution API
 - **Animations**: Framer Motion
 - **Styling**: Custom CSS with glass morphism effects
+- **Deployment**: Vercel with automatic CI/CD
 
 ## 🎯 AQI Scale Reference
 
