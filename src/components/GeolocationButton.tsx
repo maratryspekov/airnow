@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import type { AirQualityData } from "../types/airQuality";
 
 interface GeolocationButtonProps {
   onLocationFound: (cityData: { name: string; aqi: number }) => void;
-  fetchAirQuality: (city: string) => Promise<any>;
+  fetchAirQuality: (city: string) => Promise<AirQualityData | null>;
 }
 
 export default function GeolocationButton({
@@ -30,7 +31,7 @@ export default function GeolocationButton({
 
           // get city name from coordinates
           const locationResponse = await fetch(
-            `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+            `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`,
           );
 
           if (!locationResponse.ok) {
@@ -84,7 +85,7 @@ export default function GeolocationButton({
         enableHighAccuracy: true,
         timeout: 10000,
         maximumAge: 300000, // 5 minutes
-      }
+      },
     );
   };
 

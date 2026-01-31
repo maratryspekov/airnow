@@ -1,9 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
+import type { AirQualityData, PollutantData } from "../types/airQuality";
 
 // Demo data based on realistic OpenWeatherMap values
 const getDemoData = (city: string) => {
-  const demoDataMap: { [key: string]: any } = {
+  const demoDataMap: Record<
+    string,
+    AirQualityData & { pollutants: Record<string, PollutantData> }
+  > = {
     lisbon: {
       city: "Lisbon",
       aqi: 32, // Based on PM2.5: 8 μg/m³ = ~27 AQI
@@ -61,22 +65,26 @@ const getDemoData = (city: string) => {
   return demoDataMap[city.toLowerCase()] || null;
 };
 
-interface PollutantData {
-  concentration: number;
-  aqi: number;
+interface OpenWeatherGeoItem {
+  lat: number;
+  lon: number;
 }
 
-interface AirQualityData {
-  city: string;
-  aqi: number;
-  date?: string;
-  pollutants?: {
-    CO?: PollutantData;
-    NO2?: PollutantData;
-    O3?: PollutantData;
-    "PM2.5"?: PollutantData;
-    PM10?: PollutantData;
-  };
+interface OpenWeatherComponents {
+  co: number;
+  no2: number;
+  o3: number;
+  so2: number;
+  pm2_5: number;
+  pm10: number;
+}
+
+interface OpenWeatherAirItem {
+  components: OpenWeatherComponents;
+}
+
+interface OpenWeatherAirResponse {
+  list: OpenWeatherAirItem[];
 }
 
 export function useAirQuality() {
@@ -100,7 +108,7 @@ export function useAirQuality() {
           return demoData;
         } else {
           setError(
-            "Please configure OpenWeatherMap API key in .env file. Visit openweathermap.org to get a free key."
+            "Please configure OpenWeatherMap API key in .env file. Visit openweathermap.org to get a free key.",
           );
           setData(null);
           return null;
@@ -108,8 +116,8 @@ export function useAirQuality() {
       }
 
       // First get coordinates for the city using geocoding
-      const geocodeResponse = await axios.get(
-        `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`
+      const geocodeResponse = await axios.get<OpenWeatherGeoItem[]>(
+        `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`,
       );
 
       if (!geocodeResponse.data || geocodeResponse.data.length === 0) {
@@ -121,8 +129,8 @@ export function useAirQuality() {
       const { lat, lon } = geocodeResponse.data[0];
 
       // Get air pollution data using coordinates
-      const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`
+      const response = await axios.get<OpenWeatherAirResponse>(
+        `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`,
       );
 
       if (
@@ -139,7 +147,7 @@ export function useAirQuality() {
       const components = airData.components;
 
       // Calculate EPA AQI from pollutant concentrations
-      const calculateEPAAQI = (components: any): number => {
+      const calculateEPAAQI = (components: OpenWeatherComponents): number => {
         const aqiValues = [];
 
         // PM2.5 AQI calculation (μg/m³ to AQI)
@@ -149,23 +157,23 @@ export function useAirQuality() {
           if (pm25 <= 12) pm25AQI = Math.round((50 / 12) * pm25);
           else if (pm25 <= 35.4)
             pm25AQI = Math.round(
-              ((100 - 51) / (35.4 - 12.1)) * (pm25 - 12.1) + 51
+              ((100 - 51) / (35.4 - 12.1)) * (pm25 - 12.1) + 51,
             );
           else if (pm25 <= 55.4)
             pm25AQI = Math.round(
-              ((150 - 101) / (55.4 - 35.5)) * (pm25 - 35.5) + 101
+              ((150 - 101) / (55.4 - 35.5)) * (pm25 - 35.5) + 101,
             );
           else if (pm25 <= 150.4)
             pm25AQI = Math.round(
-              ((200 - 151) / (150.4 - 55.5)) * (pm25 - 55.5) + 151
+              ((200 - 151) / (150.4 - 55.5)) * (pm25 - 55.5) + 151,
             );
           else if (pm25 <= 250.4)
             pm25AQI = Math.round(
-              ((300 - 201) / (250.4 - 150.5)) * (pm25 - 150.5) + 201
+              ((300 - 201) / (250.4 - 150.5)) * (pm25 - 150.5) + 201,
             );
           else
             pm25AQI = Math.round(
-              ((500 - 301) / (500.4 - 250.5)) * (pm25 - 250.5) + 301
+              ((500 - 301) / (500.4 - 250.5)) * (pm25 - 250.5) + 301,
             );
           aqiValues.push(pm25AQI);
         }
@@ -179,19 +187,19 @@ export function useAirQuality() {
             pm10AQI = Math.round(((100 - 51) / (154 - 55)) * (pm10 - 55) + 51);
           else if (pm10 <= 254)
             pm10AQI = Math.round(
-              ((150 - 101) / (254 - 155)) * (pm10 - 155) + 101
+              ((150 - 101) / (254 - 155)) * (pm10 - 155) + 101,
             );
           else if (pm10 <= 354)
             pm10AQI = Math.round(
-              ((200 - 151) / (354 - 255)) * (pm10 - 255) + 151
+              ((200 - 151) / (354 - 255)) * (pm10 - 255) + 151,
             );
           else if (pm10 <= 424)
             pm10AQI = Math.round(
-              ((300 - 201) / (424 - 355)) * (pm10 - 355) + 201
+              ((300 - 201) / (424 - 355)) * (pm10 - 355) + 201,
             );
           else
             pm10AQI = Math.round(
-              ((500 - 301) / (604 - 425)) * (pm10 - 425) + 301
+              ((500 - 301) / (604 - 425)) * (pm10 - 425) + 301,
             );
           aqiValues.push(pm10AQI);
         }
@@ -203,19 +211,19 @@ export function useAirQuality() {
           if (o3ppm <= 0.059) o3AQI = Math.round((50 / 0.059) * o3ppm);
           else if (o3ppm <= 0.075)
             o3AQI = Math.round(
-              ((100 - 51) / (0.075 - 0.06)) * (o3ppm - 0.06) + 51
+              ((100 - 51) / (0.075 - 0.06)) * (o3ppm - 0.06) + 51,
             );
           else if (o3ppm <= 0.095)
             o3AQI = Math.round(
-              ((150 - 101) / (0.095 - 0.076)) * (o3ppm - 0.076) + 101
+              ((150 - 101) / (0.095 - 0.076)) * (o3ppm - 0.076) + 101,
             );
           else if (o3ppm <= 0.115)
             o3AQI = Math.round(
-              ((200 - 151) / (0.115 - 0.096)) * (o3ppm - 0.096) + 151
+              ((200 - 151) / (0.115 - 0.096)) * (o3ppm - 0.096) + 151,
             );
           else
             o3AQI = Math.round(
-              ((300 - 201) / (0.374 - 0.116)) * (o3ppm - 0.116) + 201
+              ((300 - 201) / (0.374 - 0.116)) * (o3ppm - 0.116) + 201,
             );
           aqiValues.push(o3AQI);
         }
@@ -260,16 +268,16 @@ export function useAirQuality() {
 
       setData(aqiData);
       return aqiData;
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Error fetching air quality:", err);
 
       // If API key is invalid or not yet activated, fallback to demo data
-      if (err.response?.status === 401) {
+      if (axios.isAxiosError(err) && err.response?.status === 401) {
         const demoData = getDemoData(city);
         if (demoData) {
           setData(demoData);
           setError(
-            "API key activating... Using demo data. May take 5-10 minutes for live data."
+            "API key activating... Using demo data. May take 5-10 minutes for live data.",
           );
           return demoData;
         }
