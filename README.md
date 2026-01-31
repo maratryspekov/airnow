@@ -5,6 +5,7 @@
 [![Vite](https://img.shields.io/badge/Vite-7.1.7-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1.16-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
+[![CI](https://github.com/maratryspekov/airnow/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/maratryspekov/airnow/actions/workflows/ci.yml)
 
 Real-time air quality monitoring app with a clean glass morphism UI. Check pollution levels for your city and get EPA-standard AQI data.
 
